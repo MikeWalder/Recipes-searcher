@@ -1,0 +1,15 @@
+
+
+/* Barre de recherche */
+
+.form-inline {
+    padding: 10px;;
+}
+
+#search-bar {
+    background-color: #e6e6e6;
+    background-image: url('../assets/main/loupe.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
