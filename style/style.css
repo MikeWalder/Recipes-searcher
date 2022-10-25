@@ -12,4 +12,38 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
+    box-sizing: border-box;
+}
+
+#main_form .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+}
+
+#main_form .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+}
+
+#main_form .form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
+}
+
+
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+    padding: 10px 15px !important;
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+}
+
+.form-control {
+    border: 0;
 }
