@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 m-0 p-0">
-                    <form autocomplete="off" class="form-inline m-0 p-0" action="index.html" id="main_form">
+                    <form autocomplete="off" class="form-inline p-0" action="index.html" id="main_form">
                         <input class="form-control col-12 m-3 p-4 text-body" type="search" id="search-bar" 
                         placeholder="Rechercher une recette" aria-label="Search">
                     </form>
@@ -36,13 +36,13 @@
         <div class="container">
             <div class="row searchers">
                 
-                <div class="col-4">
+                <div class="col-4 p-0 m-0">
                     <div class="dropdown">
                         <button class="btn btn-primary text-light m-0 p-0" type="button" data-toggle="dropdown">
                             <form autocomplete="off" action="index.html" class="m-0">
                                 <div class="input-group m-0">
-                                    <input class="form-control col-12 bg-primary text-light" type="search" 
-                                    placeholder="Rechercher un ingrédient" value="Ingrédients">
+                                    <input class="form-control col-12 bg-primary text-light"
+                                    placeholder="Rechercher un ingrédient">
                                 </div>
                             </form>
                         </button>
@@ -56,7 +56,7 @@
                             <form autocomplete="off" action="index.html" class="m-0">
                                 <div class="input-group m-0">
                                     <input class="form-control col-12 bg-info text-light py-2" type="search" 
-                                    placeholder="Rechercher un appareil" value="Appareils">
+                                    placeholder="Rechercher un appareil">
                                 </div>
                             </form>
                         </button>
@@ -68,9 +68,9 @@
                     <div class="dropdown">
                         <button class="btn btn-danger text-light m-0 p-0" type="button" data-toggle="dropdown">
                             <form autocomplete="off" action="index.html" class="m-0">
-                                <div class="input-group m-0">
+                                <div class="autocomplete">
                                     <input class="form-control col-12 bg-danger text-light py-2" type="search" 
-                                    placeholder="Rechercher un appareil" value="Ustensiles">
+                                    placeholder="Rechercher un appareil">
                                 </div>
                             </form>
                         </button>
@@ -80,10 +80,79 @@
             </div>
         </div>
 
+        <div class="container">
+            <div class="row">
+                <div class="col-4 p-0 m-0">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span id="searcher">search</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-multicol2 bg-secondary" aria-labelledby="dropdownMenuButton">
+                            <div class="dropdown-col">
+                                <a class="dropdown-item text-light" href="#">Oranges</a>
+                                <a class="dropdown-item text-light" href="#">Bananas</a>
+                                <a class="dropdown-item text-light" href="#">Apples</a>
+                            </div>
+                            <div class="dropdown-col">
+                                <a class="dropdown-item text-light" href="#">Potatoes</a>
+                                <a class="dropdown-item text-light" href="#">Leeks</a>
+                                <a class="dropdown-item text-light" href="#">Cauliflowers</a>
+                            </div>
+                            <div class="dropdown-col">
+                                <a class="dropdown-item text-light" href="#">Beef</a>
+                                <a class="dropdown-item text-light" href="#">Pork</a>
+                                <a class="dropdown-item text-light" href="#">Venison</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </header>
 
     <main>
-        <div id="recipes_result"></div>
+        <div id="recipes_section">
+            <div class="container">
+                <div class="row">
+                    <div class="card col-3 mr-3">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card col-3 ml-3 mr-3">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card col-3 ml-3">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
+                    <div class="card col-4">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
 

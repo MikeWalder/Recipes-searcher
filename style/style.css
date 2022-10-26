@@ -31,19 +31,36 @@
 
 
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: white;
-    opacity: 1; /* Firefox */
+    color: lightgrey;
+    opacity: 0.8; /* Firefox */
     padding: 10px 15px !important;
 }
 
 .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: white;
+    color: lightgrey;
 }
 
 .form-control::-ms-input-placeholder { /* Microsoft Edge */
-    color: white;
+    color: lightgrey;
 }
 
 .form-control {
     border: 0;
+}
+
+
+
+div.dropdown-multicol2{
+    width: 30em;
+}
+
+div.dropdown-multicol2>div.dropdown-col{
+    display:inline-block;
+    width: 32%;
+}
+
+.card {
+    min-width: 300px !important;
+    width: 32vw !important;
+    margin-top: 30px !important;
 }
