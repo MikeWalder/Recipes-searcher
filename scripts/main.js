@@ -27,8 +27,14 @@ async function displayAllRecipes(dataRecipes) {
     recipesSection.innerHTML = '';
     console.log(recipesSection);
     if(dataRecipes.length !== 0) {
+        let main_container = document.createElement('div');
+        main_container.className = 'container';
+        let main_row = document.createElement('div');
+        main_row.className = 'row';
+
+
         let container = document.createElement('div');
-        container.className = 'container';
+        container.className = 'container-fluid';
         let row = document.createElement('div');
         row.className = 'row';
         let card_deck = document.createElement('div');
@@ -40,9 +46,13 @@ async function displayAllRecipes(dataRecipes) {
         
 
         dataRecipes.forEach((recipe) => {
+            const grid = document.createElement('div');
+            grid.className = 'col-12 col-md-6 col-xl-4';
+
             const card = document.createElement('div');
-            card.className = "card p-3 col-12 col-md-6 col-lg-3 bg-secondary text-light";
-            card.style.width = "300px";
+            card.className = "card p-3 bg-secondary text-light";
+            grid.appendChild(card);
+            //card.style.width = "300px";
 
             // Image de la recette
             const img_recipe = document.createElement('div');
@@ -61,7 +71,7 @@ async function displayAllRecipes(dataRecipes) {
 
             card.appendChild(img_recipe);
             card.appendChild(recipe_title);
-            card_deck.appendChild(card);
+            card_deck.appendChild(grid);
             
         })
         console.log(card_deck);
