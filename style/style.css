@@ -64,3 +64,8 @@ div.dropdown-multicol2>div.dropdown-col{
     width: 32vw !important;
     margin-top: 30px !important;
 }
+
+.card-title span img {
+    width: 25px !important;
+    height: 25px !important;
+}
