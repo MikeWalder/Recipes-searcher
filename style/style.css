@@ -69,3 +69,7 @@ div.dropdown-multicol2>div.dropdown-col{
     width: 25px !important;
     height: 25px !important;
 }
+
+.descriptor {
+    word-break: normal;
+}

@@ -29,7 +29,7 @@ async function displayAllRecipes(dataRecipes) {
 
     if(dataRecipes.length > 0) {
         let main_container = document.createElement('div');
-        main_container.className = 'container-fluid';
+        main_container.className = 'container-fluid mx-n3';
         let main_row = document.createElement('div');
         main_row.className = 'row';
 
@@ -49,7 +49,7 @@ async function displayAllRecipes(dataRecipes) {
             grid.className = 'col-12 col-md-4';
 
             const card = document.createElement('div');
-            card.className = "card border-0 p-0 m-0 text-light rounded";
+            card.className = "card border-0 p-0 m-n2 text-light rounded";
             grid.appendChild(card);
 
             // Image de la recette
@@ -107,8 +107,8 @@ async function displayAllRecipes(dataRecipes) {
             column_recipe_right.className = 'col-6 m-0';
             row_recipe.appendChild(column_recipe_right);
             let desc_recipe = document.createElement('span');
-            desc_recipe.className = 'h6';
-            desc_recipe.innerHTML = recipe.description.split(" " , 30) + '...';
+            desc_recipe.className = 'h6 descriptor';
+            desc_recipe.innerHTML = recipe.description.substr(0, 150) + ' ...';
             column_recipe_right.appendChild(desc_recipe);
             
 
