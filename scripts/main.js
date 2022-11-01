@@ -11,21 +11,10 @@ async function requestAllRecipes() {
 }
 
 
-async function displayData(photographers) {
-    const recipesSection = document.querySelector("#recipes_result");
-
-    photographers.photographers.forEach((photographer) => {
-        const photographerModel = photographerFactory(photographer);
-        // console.log(photographerModel);
-        const userCardDOM = photographerModel.getUserCardDOM();
-        recipesSection.appendChild(userCardDOM);
-    });
-};
-
 async function displayAllRecipes(dataRecipes) {
     const recipesSection = document.querySelector('#recipes_section');
     recipesSection.innerHTML = '';
-    console.log(recipesSection);
+    // console.log(recipesSection);
 
     if(dataRecipes.length > 0) {
         let main_container = document.createElement('div');
@@ -104,7 +93,7 @@ async function displayAllRecipes(dataRecipes) {
             })
 
             let column_recipe_right = document.createElement('div');
-            column_recipe_right.className = 'col-6 m-0';
+            column_recipe_right.className = 'col-6 m-0 pl-0';
             row_recipe.appendChild(column_recipe_right);
             let desc_recipe = document.createElement('span');
             desc_recipe.className = 'h6 descriptor';
@@ -120,18 +109,44 @@ async function displayAllRecipes(dataRecipes) {
             card_deck.appendChild(grid);
             
         })
-        console.log(card_deck);
+        // console.log(card_deck);
         recipesSection.appendChild(container);
         /* console.log(containerDOM);
         row.appendChild(containerDOM); */
     }
 }
 
-/* async function completeRecipesByReserches(inpt, recipes) {
-    recipes.forEach((recipe) =>{
-        // console.log(recipe.name + " - " + recipe.appliance);
-    })
-} */
+// Système d'autocomplétion de la barre de recherches 
+
+
+function autocompletionDataSearcher(datas) {
+    const main_search_bar = document.querySelector('#search-bar');
+    main_search_bar.addEventListener('keydown', (e) => {
+        // console.log(datas);
+        let datas_searched = [];
+        // Tri du jeu de données initial
+        datas.sort(function(a, b) {
+            return a.name.localeCompare(b.name);
+        });
+        console.log(datas); 
+
+        datas.forEach((data) => {
+            //console.log(data.name);
+            if(data.name.toLowerCase().startsWith(main_search_bar.value.toLowerCase()) && main_search_bar.value != "") {
+                datas_searched.push(data);
+            }
+        });
+        console.log(datas_searched);
+        // console.log(datas_searched.sort());
+        //let datas_searched_sort = datas_searched.sort();
+
+        /* if(datas_searched_sort.toLowerCase().startsWith(main_search_bar.ariaValueMax.toLowerCase())
+        && main_search_bar.value != ""){
+            // Create list elements for autocompletion
+        } */
+        
+    });
+}
 
 async function init() {
     // Récupère les datas des photographes
@@ -139,8 +154,8 @@ async function init() {
     // console.log(photographers);
     // displayData(photographers);
 
-    console.log(typeof(recipes));
     displayAllRecipes(recipes);
+    autocompletionDataSearcher(recipes);
     // completeRecipesByReserches(document.getElementById('#recipes_section'), recipes);
 };
 
