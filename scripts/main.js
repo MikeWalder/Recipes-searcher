@@ -11,39 +11,48 @@ async function requestAllRecipes() {
 }
 
 
-async function displayAllRecipes(dataRecipes) {
+async function displayRecipes(dataRecipes) {
     const recipesSection = document.querySelector('#recipes_section');
     recipesSection.innerHTML = '';
     // console.log(recipesSection);
 
     if(dataRecipes.length > 0) {
         let main_container = document.createElement('div');
-        main_container.className = 'container-fluid mx-n3';
+        main_container.className = 'container';
+        recipesSection.appendChild(main_container);
+
         let main_row = document.createElement('div');
         main_row.className = 'row';
+        main_container.appendChild(main_row);
 
 
-        let container = document.createElement('div');
-        container.className = 'container-fluid';
-        let row = document.createElement('div');
-        row.className = 'row';
+        let center_spacing_column_cards = document.createElement('div');
+        center_spacing_column_cards.className = 'col-12';
+        main_row.appendChild(center_spacing_column_cards);
+
+        let container_cards = document.createElement('div');
+        container_cards.className = 'container';
+        center_spacing_column_cards.appendChild(container_cards);
+
+        let row_cards = document.createElement('div');
+        row_cards.className = 'row';
+        container_cards.appendChild(row_cards);
+
         let card_deck = document.createElement('div');
         card_deck.className = 'card-deck';
-        
-        container.appendChild(row);
-        row.appendChild(card_deck);
+        row_cards.appendChild(card_deck);
         
         dataRecipes.forEach((recipe) => {
             const grid = document.createElement('div');
-            grid.className = 'col-12 col-md-4';
+            grid.className = 'col-12 col-md-6 col-lg-4';
 
             const card = document.createElement('div');
-            card.className = "card border-0 p-0 m-n2 text-light rounded";
+            card.className = "card border-0 p-0 m-0 text-light rounded";
             grid.appendChild(card);
 
             // Image de la recette
             const img_recipe = document.createElement('div');
-            img_recipe.className = 'card-img-top img-thumbnail';
+            img_recipe.className = 'card-img-top';
             img_recipe.src = ""; // Introduire l'image de chaque recette
             img_recipe.alt = recipe.appliance;
             img_recipe.style.height = '200px';
@@ -52,19 +61,19 @@ async function displayAllRecipes(dataRecipes) {
 
             // Corps de la recette
             const card_body = document.createElement('div');
-            card_body.className = 'card-body text-dark';
+            card_body.className = 'card-body text-dark p-2';
             card_body.style.height = '250px';
             card_body.style.backgroundColor = '#E7E7E7';
 
             // Partie titre du de la recette et temps alloué
             let recipe_div = document.createElement('div');
-            recipe_div.className = 'card-title d-flex justify-content-between';
+            recipe_div.className = 'card-title d-flex justify-content-between pr-0';
             let recipe_title = document.createElement('span');
             recipe_title.className = 'h5';
             recipe_title.innerHTML = recipe.name;
             let recipe_time = document.createElement('span');
             recipe_time.className = 'h5 font-weight-bold';
-            recipe_time.innerHTML = '<img src="assets/main/clock.png"> ' + recipe.time + ' min';
+            recipe_time.innerHTML = '<img src="assets/main/clock.png">' + recipe.time + 'min';
             recipe_div.appendChild(recipe_title);
             recipe_div.appendChild(recipe_time);
 
@@ -93,11 +102,11 @@ async function displayAllRecipes(dataRecipes) {
             })
 
             let column_recipe_right = document.createElement('div');
-            column_recipe_right.className = 'col-6 m-0 pl-0';
+            column_recipe_right.className = 'col-6 m-0 pl-0 pr-1 recipe-descriptor';
             row_recipe.appendChild(column_recipe_right);
             let desc_recipe = document.createElement('span');
-            desc_recipe.className = 'h6 descriptor';
-            desc_recipe.innerHTML = recipe.description.substr(0, 150) + ' ...';
+            desc_recipe.className = 'h6';
+            desc_recipe.innerHTML = recipe.description.substr(0, 120) + '(...)';
             column_recipe_right.appendChild(desc_recipe);
             
 
@@ -109,10 +118,11 @@ async function displayAllRecipes(dataRecipes) {
             card_deck.appendChild(grid);
             
         })
-        // console.log(card_deck);
-        recipesSection.appendChild(container);
-        /* console.log(containerDOM);
-        row.appendChild(containerDOM); */
+        /* let right_spacing_column_cards = document.createElement('div');
+        right_spacing_column_cards.className = 'col-md-1 p-0 m-0';
+        main_row.appendChild(right_spacing_column_cards); */
+
+        recipesSection.appendChild(main_container);
     }
 }
 
@@ -125,9 +135,12 @@ function autocompletionDataSearcher(datas) {
         // console.log(datas);
         let datas_searched = [];
         // Tri du jeu de données initial
-        datas.sort(function(a, b) {
-            return a.name.localeCompare(b.name);
-        });
+        console.log(datas);
+        if(datas.length >= 2) {
+            datas.sort(function(a, b) {
+                return a.name.localeCompare(b.name);
+            });
+        }
         console.log(datas); 
 
         datas.forEach((data) => {
@@ -137,14 +150,10 @@ function autocompletionDataSearcher(datas) {
             }
         });
         console.log(datas_searched);
-        // console.log(datas_searched.sort());
-        //let datas_searched_sort = datas_searched.sort();
 
-        /* if(datas_searched_sort.toLowerCase().startsWith(main_search_bar.ariaValueMax.toLowerCase())
-        && main_search_bar.value != ""){
-            // Create list elements for autocompletion
-        } */
-        
+        // Modification automatique du DOM de l'id recipes_section
+        displayRecipes(datas_searched);
+        return datas_searched;
     });
 }
 
@@ -154,8 +163,12 @@ async function init() {
     // console.log(photographers);
     // displayData(photographers);
 
-    displayAllRecipes(recipes);
+    displayRecipes(recipes);
+    
+    // autocompletionDataSearcher(datas_main_searcher);
+    
     autocompletionDataSearcher(recipes);
+    
     // completeRecipesByReserches(document.getElementById('#recipes_section'), recipes);
 };
 

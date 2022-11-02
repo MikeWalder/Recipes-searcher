@@ -48,8 +48,6 @@
     border: 0;
 }
 
-
-
 div.dropdown-multicol2{
     width: 30em;
 }
@@ -60,16 +58,15 @@ div.dropdown-multicol2>div.dropdown-col{
 }
 
 .card {
-    min-width: 300px !important;
-    width: 32vw !important;
     margin-top: 30px !important;
 }
 
 .card-title span img {
-    width: 25px !important;
-    height: 25px !important;
+    width: 20px !important;
+    height: 20px !important;
 }
 
-.descriptor {
+.recipe-descriptor {
     word-break: normal;
+    overflow: hidden !important;
 }
