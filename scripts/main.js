@@ -14,7 +14,6 @@ async function requestAllRecipes() {
 async function displayRecipes(dataRecipes) {
     const recipesSection = document.querySelector('#recipes_section');
     recipesSection.innerHTML = '';
-    // console.log(recipesSection);
 
     if(dataRecipes.length > 0) {
         let main_container = document.createElement('div');
@@ -27,7 +26,7 @@ async function displayRecipes(dataRecipes) {
 
 
         let center_spacing_column_cards = document.createElement('div');
-        center_spacing_column_cards.className = 'col-12';
+        center_spacing_column_cards.className = 'col-12 px-0';
         main_row.appendChild(center_spacing_column_cards);
 
         let container_cards = document.createElement('div');
@@ -74,6 +73,7 @@ async function displayRecipes(dataRecipes) {
             let recipe_time = document.createElement('span');
             recipe_time.className = 'h5 font-weight-bold';
             recipe_time.innerHTML = '<img src="assets/main/clock.png">' + recipe.time + 'min';
+            recipe_time.style.minWidth = '80px';
             recipe_div.appendChild(recipe_title);
             recipe_div.appendChild(recipe_time);
 
@@ -86,7 +86,7 @@ async function displayRecipes(dataRecipes) {
             let column_recipe = document.createElement('div');
             column_recipe.className = 'col-6 m-0';
             let ingredients_recipe = document.createElement('span');
-            ingredients_recipe.className = 'font-weight-bold';
+            ingredients_recipe.className = 'font-weight-bold h6';
             column_recipe.appendChild(ingredients_recipe);
             row_recipe.appendChild(column_recipe);
 
@@ -102,14 +102,13 @@ async function displayRecipes(dataRecipes) {
             })
 
             let column_recipe_right = document.createElement('div');
-            column_recipe_right.className = 'col-6 m-0 pl-0 pr-1 recipe-descriptor';
+            column_recipe_right.className = 'col-6 m-0 pl-0 pr-2 recipe-descriptor';
             row_recipe.appendChild(column_recipe_right);
             let desc_recipe = document.createElement('span');
             desc_recipe.className = 'h6';
             desc_recipe.innerHTML = recipe.description.substr(0, 120) + '(...)';
             column_recipe_right.appendChild(desc_recipe);
             
-
             // Imbrications du DOM
             card.appendChild(img_recipe);
             card_body.appendChild(recipe_div);
@@ -118,10 +117,6 @@ async function displayRecipes(dataRecipes) {
             card_deck.appendChild(grid);
             
         })
-        /* let right_spacing_column_cards = document.createElement('div');
-        right_spacing_column_cards.className = 'col-md-1 p-0 m-0';
-        main_row.appendChild(right_spacing_column_cards); */
-
         recipesSection.appendChild(main_container);
     }
 }
@@ -134,7 +129,8 @@ function autocompletionDataSearcher(datas) {
     main_search_bar.addEventListener('keydown', (e) => {
         // console.log(datas);
         let datas_searched = [];
-        // Tri du jeu de données initial
+
+        // Tri du jeu de données initial par ordre alphabétique croissant
         console.log(datas);
         if(datas.length >= 2) {
             datas.sort(function(a, b) {
@@ -143,6 +139,8 @@ function autocompletionDataSearcher(datas) {
         }
         console.log(datas); 
 
+
+        // Recherche dans le tableau de données trié des valeurs correspondantes à l'input de la search bar 
         datas.forEach((data) => {
             //console.log(data.name);
             if(data.name.toLowerCase().startsWith(main_search_bar.value.toLowerCase()) && main_search_bar.value != "") {
@@ -160,16 +158,10 @@ function autocompletionDataSearcher(datas) {
 async function init() {
     // Récupère les datas des photographes
     const recipes = await requestAllRecipes();
-    // console.log(photographers);
-    // displayData(photographers);
 
     displayRecipes(recipes);
     
-    // autocompletionDataSearcher(datas_main_searcher);
-    
     autocompletionDataSearcher(recipes);
-    
-    // completeRecipesByReserches(document.getElementById('#recipes_section'), recipes);
 };
 
 init();
