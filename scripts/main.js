@@ -66,14 +66,14 @@ async function displayRecipes(dataRecipes) {
 
             // Partie titre du de la recette et temps alloué
             let recipe_div = document.createElement('div');
-            recipe_div.className = 'card-title d-flex justify-content-between pr-0';
+            recipe_div.className = 'card-title d-flex justify-content-between border border-left-0 border-right-0 border-top-0 border-secondary pr-0';
             let recipe_title = document.createElement('span');
-            recipe_title.className = 'h5';
+            recipe_title.className = 'h5 font-weight-bold';
             recipe_title.innerHTML = recipe.name;
             let recipe_time = document.createElement('span');
-            recipe_time.className = 'h5 font-weight-bold';
-            recipe_time.innerHTML = '<img class="mb-1" src="assets/main/clock.png"> ' + recipe.time + 'min';
-            recipe_time.style.minWidth = '85px';
+            recipe_time.className = 'h5 font-weight-bold mb-0';
+            recipe_time.innerHTML = '<img class="mb-0" src="assets/main/clock.png">' + recipe.time + 'min';
+            recipe_time.style.minWidth = '90px';
             recipe_div.appendChild(recipe_title);
             recipe_div.appendChild(recipe_time);
 
@@ -132,7 +132,8 @@ async function displayRecipes(dataRecipes) {
 
 
 function autocompletionDataSearcher(datas) {
-    const main_search_bar = document.querySelector('#search-bar');
+    const main_search_bar = document.querySelector('#main-search-bar');
+    const ingredients_search_bar = document.querySelector('#ingredients-search-bar');
     main_search_bar.addEventListener('keydown', (e) => {
         // console.log(datas);
         let datas_searched = [];
@@ -146,7 +147,6 @@ function autocompletionDataSearcher(datas) {
         }
         console.log(datas); 
 
-
         // Recherche dans le tableau de données trié des valeurs correspondantes à l'input de la search bar 
         datas.forEach((data) => {
             //console.log(data.name);
@@ -158,7 +158,23 @@ function autocompletionDataSearcher(datas) {
 
         // Modification automatique du DOM de l'id recipes_section
         displayRecipes(datas_searched);
+
         return datas_searched;
+    });
+
+    ingredients_search_bar.addEventListener('keydown', (e) => {
+        console.log(datas);
+        let ingredients_searched = [];
+        setTimeout(() => {
+            console.log(ingredients_search_bar.value)
+            datas.forEach((data) => {
+                console.log(data.appliance);
+                if(data.appliance.toLowerCase().startsWith(ingredients_search_bar.value.toLowerCase()) && ingredients_search_bar.value != "") {
+                    ingredients_searched.push(data);
+                }
+            });
+            console.log(ingredients_searched);
+        }, 100);
     });
 }
 
@@ -169,6 +185,7 @@ async function init() {
     displayRecipes(recipes);
     
     autocompletionDataSearcher(recipes);
+
 };
 
 init();

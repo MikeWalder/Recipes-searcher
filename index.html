@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-sm-12 m-0 p-0">
                     <form autocomplete="off" class="form-inline p-0" action="index.html" id="main_form">
-                        <input class="form-control col-12 p-4 text-body" type="search" id="search-bar" 
+                        <input class="form-control col-12 p-4 text-body" type="search" id="main-search-bar" 
                         placeholder="Rechercher une recette" aria-label="Search">
                     </form>
                 </div>
@@ -39,13 +39,11 @@
                     <div class="dropdown col-12">
                         <button class="btn btn-primary btn-block text-light" type="button" data-toggle="dropdown">
                             <form autocomplete="off" action="index.html" class="m-0">
-                                <div class="input-group m-0">
-                                    <input class="form-control col-12 bg-primary text-light"
-                                    placeholder="Rechercher un ingrédient...">
-                                </div>
+                                <input class="form-control col-12 bg-primary text-light" type="search" id="ingredients-search-bar"
+                                placeholder="Rechercher un ingrédient...">
                             </form>
                         </button>
-                        <div id="ingredients_result bg-primary text-light"></div>
+                        <div id="ingredients_result" class="bg-primary text-light"></div>
                     </div> 
                 </div>
 
@@ -97,7 +95,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
                 <div class="col-4 p-0 m-0">
                     <div class="dropdown">
@@ -124,7 +122,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </header>
 
