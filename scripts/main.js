@@ -1,5 +1,5 @@
 async function requestAllRecipes() {
-    return fetch('http://127.0.0.1:5500/Recipes-searcher/data/recipes.json')
+    return fetch('http://127.0.0.1:5500/data/recipes.json')
     .then(function(response) {
         return response.json();
     })
@@ -72,41 +72,48 @@ async function displayRecipes(dataRecipes) {
             recipe_title.innerHTML = recipe.name;
             let recipe_time = document.createElement('span');
             recipe_time.className = 'h5 font-weight-bold';
-            recipe_time.innerHTML = '<img src="assets/main/clock.png">' + recipe.time + 'min';
-            recipe_time.style.minWidth = '80px';
+            recipe_time.innerHTML = '<img class="mb-1" src="assets/main/clock.png"> ' + recipe.time + 'min';
+            recipe_time.style.minWidth = '85px';
             recipe_div.appendChild(recipe_title);
             recipe_div.appendChild(recipe_time);
 
             // Partie informations de la recette
             let container_recipe = document.createElement('div');
-            container_recipe.className = 'container-fluid p-0 m-0';
+            container_recipe.className = 'container-fluid no-gutters';
             let row_recipe = document.createElement('div');
             row_recipe.className = 'row';
             container_recipe.appendChild(row_recipe);
             let column_recipe = document.createElement('div');
-            column_recipe.className = 'col-6 m-0';
+            column_recipe.className = 'col-6 col-lg-7 m-0 ml-0 pl-0';
             let ingredients_recipe = document.createElement('span');
             ingredients_recipe.className = 'font-weight-bold h6';
             column_recipe.appendChild(ingredients_recipe);
             row_recipe.appendChild(column_recipe);
 
             recipe.ingredients.forEach((ingredient) => {
+                ingredients_recipe.innerHTML += ingredient.ingredient;
                 if(ingredient.unit) {
-                    if(ingredient.unit.length <= 2){
-                        ingredients_recipe.innerHTML += '' + ingredient.ingredient + ' : ' + ingredient.quantity + ' ' + ingredient.unit.split(" ", 1) + '<br>';
+                    switch(ingredient.unit) {
+                        case 'cuillères à soupe' :
+                            ingredients_recipe.innerHTML += ' : ' + ingredient.quantity + 'c.c.<br>';
+                            break;
+                        case 'grammes' : 
+                            ingredients_recipe.innerHTML += ' : ' + ingredient.quantity + 'g<br>';
+                            break;
+                        default:
+                            ingredients_recipe.innerHTML += ' : ' + ingredient.quantity + ' ' + ingredient.unit + '<br>';
                     }
-                    else {
-                        ingredients_recipe.innerHTML += '' + ingredient.ingredient + ' : ' + ingredient.quantity + ' ' + ingredient.unit.substr(0, 1) + '<br>';
-                    }
+                } else {
+                    ingredients_recipe.innerHTML += '<br>';
                 }
             })
 
             let column_recipe_right = document.createElement('div');
-            column_recipe_right.className = 'col-6 m-0 pl-0 pr-2 recipe-descriptor';
+            column_recipe_right.className = 'col-6 col-lg-5 m-0 pl-0 pr-0 recipe-descriptor';
             row_recipe.appendChild(column_recipe_right);
             let desc_recipe = document.createElement('span');
             desc_recipe.className = 'h6';
-            desc_recipe.innerHTML = recipe.description.substr(0, 120) + '(...)';
+            desc_recipe.innerHTML = recipe.description.substr(0, 100) + '(...)';
             column_recipe_right.appendChild(desc_recipe);
             
             // Imbrications du DOM
