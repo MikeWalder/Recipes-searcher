@@ -37,41 +37,68 @@
                 
                 <div class="col-4">
                     <div class="dropdown col-12">
-                        <button class="btn btn-primary btn-block text-light" type="button" data-toggle="dropdown">
-                            <form autocomplete="off" action="index.html" class="m-0">
+                        <!-- <button class="btn btn-primary btn-block text-light" type="button" data-toggle="dropdown"> -->
+                            <form autocomplete="off" action="index.html" class="m-0" id="drop_ingredients" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <input class="form-control col-12 bg-primary text-light" type="search" id="ingredients-search-bar"
                                 placeholder="Rechercher un ingrédient...">
                             </form>
-                        </button>
+                        <!-- </button> -->
+
+                        <div class="dropdown-menu dropdown-multicol2 bg-primary" aria-labelledby="drop_ingredients">
+                            <div class="container-fluid">
+                                <div class="row text-light" id="dropped_ingredients_components">
+                                    <!-- Insert all different ingredients available on JSON file -->
+                                        
+                                </div>
+                            </div>
+                        </div>
+
                         <div id="ingredients_result" class="bg-primary text-light"></div>
+
                     </div> 
                 </div>
 
                 <div class="col-4">
                     <div class="dropdown col-12">
-                        <button class="btn btn-info btn-block text-light" type="button" data-toggle="dropdown">
-                            <form autocomplete="off" action="index.html" class="m-0">
-                                <div class="input-group">
-                                    <input class="form-control col-12 bg-info text-light" type="search" 
-                                    placeholder="Rechercher un appareil...">
-                                </div>
+                        <!-- <button class="btn btn-info btn-block text-light" type="button"> -->
+                            <form autocomplete="off" action="index.html" class="m-0" id="dropAppliance" data-toggle="dropdown">
+                                <input class="form-control col-12 bg-info text-light border-0" type="search" 
+                                placeholder="Rechercher un appareil...">
                             </form>
-                        </button>
+                        <!-- </button> -->
+
+                        <div class="dropdown-menu dropdown-multicol2 bg-info" aria-labelledby="dropAppliance">
+                            <div class="dropdown-col">
+                                <a class="dropdown-item text-light" href="#">Oranges</a>
+                                <a class="dropdown-item text-light" href="#">Bananas</a>
+                                <a class="dropdown-item text-light" href="#">Apples</a>
+                            </div>
+                            <div class="dropdown-col">
+                                <a class="dropdown-item text-light" href="#">Potatoes</a>
+                                <a class="dropdown-item text-light" href="#">Leeks</a>
+                                <a class="dropdown-item text-light" href="#">Cauliflowers</a>
+                            </div>
+                            <div class="dropdown-col">
+                                <a class="dropdown-item text-light" href="#">Beef</a>
+                                <a class="dropdown-item text-light" href="#">Pork</a>
+                                <a class="dropdown-item text-light" href="#">Venison</a>
+                            </div>
+                        </div>
+
                         <div id="ingredients_result bg-info text-light"></div>
+
                     </div> 
                 </div>
 
                 <div class="col-4">
                     <div class="dropdown col-12">
-                        <button class="btn btn-danger btn-block text-light" type="button" id="dropDevice" data-toggle="dropdown">
-                            <form autocomplete="off" action="index.html" class="m-0">
-                                <div class="autocomplete">
-                                    <input class="form-control col-12 bg-danger text-light py-2" type="search" 
-                                    placeholder="Rechercher un appareil...">
-                                </div>
+                        <!-- <button class="btn btn-danger btn-block text-light m-0" role="button" type="button"  aria-haspopup="true" aria-expanded="false"> -->
+                            <form autocomplete="off" action="index.html" class="m-0" id="dropDevice" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <input class="form-control bg-danger text-light border-0 dropdown dropdown-toggle" type="search" 
+                                placeholder="Rechercher un ustensile...">
                             </form>
-                        </button>
-                        <div class="dropdown-menu bg-secondary" aria-labelledby="dropDevice">
+                        <!-- </button> -->
+                        <div class="dropdown-menu dropdown-multicol2 bg-danger" aria-labelledby="dropDevice">
                             <div class="dropdown-col">
                                 <a class="dropdown-item text-light" href="#">Oranges</a>
                                 <a class="dropdown-item text-light" href="#">Bananas</a>
@@ -97,11 +124,14 @@
 
         <!-- <div class="container">
             <div class="row">
-                <div class="col-4 p-0 m-0">
+                <div class="no-gutters">
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span id="searcher">search</span>
-                        </button>
+
+                        <form autocomplete="off" action="index.html" class="m-0 dropdown" id="dropdownMenuButton" data-toggle="dropdown">
+                            <input class="form-control bg-danger text-light border-0 dropdown-toggle" type="search" 
+                            placeholder="Rechercher un ustensile...">
+                        </form>
+
                         <div class="dropdown-menu dropdown-multicol2 bg-secondary" aria-labelledby="dropdownMenuButton">
                             <div class="dropdown-col">
                                 <a class="dropdown-item text-light" href="#">Oranges</a>
@@ -119,6 +149,7 @@
                                 <a class="dropdown-item text-light" href="#">Venison</a>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

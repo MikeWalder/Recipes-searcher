@@ -49,7 +49,7 @@ async function displayRecipes(dataRecipes) {
             card.className = "card border-0 p-0 m-0 text-light rounded";
             grid.appendChild(card);
 
-            // Image de la recette
+            // Recipe image
             const img_recipe = document.createElement('div');
             img_recipe.className = 'card-img-top';
             img_recipe.src = ""; // Introduire l'image de chaque recette
@@ -58,13 +58,13 @@ async function displayRecipes(dataRecipes) {
             img_recipe.style.backgroundColor = '#C7BEBE';
             card.appendChild(img_recipe);
 
-            // Corps de la recette
+            // Recipe body
             const card_body = document.createElement('div');
             card_body.className = 'card-body text-dark p-2';
             card_body.style.height = '250px';
             card_body.style.backgroundColor = '#E7E7E7';
 
-            // Partie titre du de la recette et temps alloué
+            // Recipe title part 
             let recipe_div = document.createElement('div');
             recipe_div.className = 'card-title d-flex justify-content-between border border-left-0 border-right-0 border-top-0 border-secondary pr-0';
             let recipe_title = document.createElement('span');
@@ -77,7 +77,7 @@ async function displayRecipes(dataRecipes) {
             recipe_div.appendChild(recipe_title);
             recipe_div.appendChild(recipe_time);
 
-            // Partie informations de la recette
+            // Recipe informations part
             let container_recipe = document.createElement('div');
             container_recipe.className = 'container-fluid no-gutters';
             let row_recipe = document.createElement('div');
@@ -90,6 +90,7 @@ async function displayRecipes(dataRecipes) {
             column_recipe.appendChild(ingredients_recipe);
             row_recipe.appendChild(column_recipe);
 
+            // Recipe unit handling
             recipe.ingredients.forEach((ingredient) => {
                 ingredients_recipe.innerHTML += ingredient.ingredient;
                 if(ingredient.unit) {
@@ -108,38 +109,70 @@ async function displayRecipes(dataRecipes) {
                 }
             })
 
+            // Recipe informations DOM
             let column_recipe_right = document.createElement('div');
             column_recipe_right.className = 'col-6 col-lg-5 m-0 pl-0 pr-0 recipe-descriptor';
             row_recipe.appendChild(column_recipe_right);
+
             let desc_recipe = document.createElement('span');
             desc_recipe.className = 'h6';
             desc_recipe.innerHTML = recipe.description.substr(0, 100) + '(...)';
             column_recipe_right.appendChild(desc_recipe);
             
-            // Imbrications du DOM
+            // DOM nesting
             card.appendChild(img_recipe);
             card_body.appendChild(recipe_div);
             card_body.appendChild(container_recipe);
             card.appendChild(card_body);
             card_deck.appendChild(grid);
-            
         })
         recipesSection.appendChild(main_container);
     }
 }
 
-// Système d'autocomplétion de la barre de recherches 
+
+// Auto display ingredients inside ingredient search bar 
+async function displayIngredientsInDOM(ingredients) {
+    const dropped_ingredients_components = document.querySelector('#dropped_ingredients_components');
+    dropped_ingredients_components.innerHTML = '';
+
+    // DOM imbrication nesting
+    if(ingredients.length != 0 && ingredients.length != 2) {
+        ingredients.forEach((ingredient) => {
+            const dropped_column = document.createElement('div');
+            dropped_column.className = 'col-4';
+            dropped_column.innerHTML = '<a class="h6 pl-0 dropdown-item text-light btn btn-primary bg-primary">' + ingredient + '</a>';
+            dropped_ingredients_components.appendChild(dropped_column);
+        })
+    }
+    else if (ingredients.length == 2) {
+        ingredients.forEach((ingredient) => {
+            const dropped_column = document.createElement('div');
+            dropped_column.className = 'col-6';
+            dropped_column.innerHTML = '<a class="h6 dropdown-item text-light btn btn-primary bg-primary">' + ingredient + '</a>';
+            dropped_ingredients_components.style.width = '30em';
+            dropped_ingredients_components.appendChild(dropped_column);
+        })
+    }
+    else if (ingredients.length == 0) {
+        const dropped_column = document.createElement('div');
+        dropped_column.innerHTML = '<span class="h6 pl-3 text-light"> Aucun résultat </span>';
+        dropped_ingredients_components.appendChild(dropped_column);
+    }
+}
 
 
+// Autocompletion system inside search bars
 function autocompletionDataSearcher(datas) {
     const main_search_bar = document.querySelector('#main-search-bar');
+
     const ingredients_search_bar = document.querySelector('#ingredients-search-bar');
+
     main_search_bar.addEventListener('keydown', (e) => {
         // console.log(datas);
         let datas_searched = [];
 
-        // Tri du jeu de données initial par ordre alphabétique croissant
-        console.log(datas);
+        // Sorting the initial dataset in ascending alphabetical order
         if(datas.length >= 2) {
             datas.sort(function(a, b) {
                 return a.name.localeCompare(b.name);
@@ -149,12 +182,10 @@ function autocompletionDataSearcher(datas) {
 
         // Recherche dans le tableau de données trié des valeurs correspondantes à l'input de la search bar 
         datas.forEach((data) => {
-            //console.log(data.name);
             if(data.name.toLowerCase().startsWith(main_search_bar.value.toLowerCase()) && main_search_bar.value != "") {
                 datas_searched.push(data);
             }
         });
-        console.log(datas_searched);
 
         // Modification automatique du DOM de l'id recipes_section
         displayRecipes(datas_searched);
@@ -162,30 +193,54 @@ function autocompletionDataSearcher(datas) {
         return datas_searched;
     });
 
-    ingredients_search_bar.addEventListener('keydown', (e) => {
-        console.log(datas);
-        let ingredients_searched = [];
+
+    ingredients_search_bar.addEventListener('focus', (e) => {
+        const dropped_ingredients_components = document.querySelector('#dropped_ingredients_components');
+        dropped_ingredients_components.innerHTML == '';
+        console.log(ingredients_search_bar.value);
         setTimeout(() => {
-            console.log(ingredients_search_bar.value)
+            ingredients_search_bar.value == "";
+            ingredients_search_bar.innerHTML == "";
+        }, 20);
+        
+        setTimeout(() => {
+            if(ingredients_search_bar.value == ''){
+                const dropped_column = document.createElement('div');
+                dropped_column.innerHTML = '<span class="h6 pl-3 text-light"> Aucun résultat </span>';
+                dropped_ingredients_components.appendChild(dropped_column);
+            }
+        }, 50);
+    });
+
+
+    ingredients_search_bar.addEventListener('keydown', (e) => {
+        let ingredients_searched = [];
+
+        setTimeout(() => {
             datas.forEach((data) => {
-                console.log(data.appliance);
-                if(data.appliance.toLowerCase().startsWith(ingredients_search_bar.value.toLowerCase()) && ingredients_search_bar.value != "") {
-                    ingredients_searched.push(data);
-                }
+                // console.log(data.appliance);
+                data.ingredients.forEach((item) => {
+                    if(item.ingredient.toLowerCase().startsWith(ingredients_search_bar.value.toLowerCase()) && ingredients_search_bar.value != "") {
+                        ingredients_searched.push(item.ingredient);
+                    }
+                });
             });
-            console.log(ingredients_searched);
+
+            // Delete all values in ingredients_searched that are the same
+            let unique_ingredients = ingredients_searched.filter((x, i) => ingredients_searched.indexOf(x) === i);
+
+            // Display unique_ingredients into yje ingredient search element as dropdown items elements
+            displayIngredientsInDOM(unique_ingredients);
         }, 100);
     });
 }
 
+
+// Initialisation
 async function init() {
-    // Récupère les datas des photographes
     const recipes = await requestAllRecipes();
-
     displayRecipes(recipes);
-    
     autocompletionDataSearcher(recipes);
-
 };
 
 init();
