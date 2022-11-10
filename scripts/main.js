@@ -141,7 +141,8 @@ async function displayIngredientsInDOM(ingredients) {
         ingredients.forEach((ingredient) => {
             const dropped_column = document.createElement('div');
             dropped_column.className = 'col-4';
-            dropped_column.innerHTML = '<a class="h6 pl-0 dropdown-item text-light btn btn-primary bg-primary">' + ingredient + '</a>';
+            dropped_column.innerHTML = '<a class="h6 pl-2 dropdown-item text-light btn btn-primary bg-primary">' + ingredient.charAt(0).toUpperCase() + ingredient.slice(1).split(' ').slice(0, 3).join(' '); + '</a>';
+            dropped_ingredients_components.style.minWidth = '40em';
             dropped_ingredients_components.appendChild(dropped_column);
         })
     }
@@ -149,14 +150,15 @@ async function displayIngredientsInDOM(ingredients) {
         ingredients.forEach((ingredient) => {
             const dropped_column = document.createElement('div');
             dropped_column.className = 'col-6';
-            dropped_column.innerHTML = '<a class="h6 dropdown-item text-light btn btn-primary bg-primary">' + ingredient + '</a>';
-            dropped_ingredients_components.style.width = '30em';
+            dropped_column.innerHTML = '<a class="h6 pl-2 dropdown-item text-light btn btn-primary bg-primary">' + ingredient.charAt(0).toUpperCase() + ingredient.slice(1) + '</a>';
+            dropped_ingredients_components.style.width = '10em';
             dropped_ingredients_components.appendChild(dropped_column);
         })
     }
     else if (ingredients.length == 0) {
         const dropped_column = document.createElement('div');
         dropped_column.innerHTML = '<span class="h6 pl-3 text-light"> Aucun résultat </span>';
+        dropped_ingredients_components.style.width = 'auto';
         dropped_ingredients_components.appendChild(dropped_column);
     }
 }
@@ -196,11 +198,11 @@ function autocompletionDataSearcher(datas) {
 
     ingredients_search_bar.addEventListener('focus', (e) => {
         const dropped_ingredients_components = document.querySelector('#dropped_ingredients_components');
-        dropped_ingredients_components.innerHTML == '';
+        dropped_ingredients_components.innerHTML = '';
         console.log(ingredients_search_bar.value);
         setTimeout(() => {
-            ingredients_search_bar.value == "";
-            ingredients_search_bar.innerHTML == "";
+            ingredients_search_bar.value = "";
+            ingredients_search_bar.innerHTML = "";
         }, 20);
         
         setTimeout(() => {

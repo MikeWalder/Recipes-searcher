@@ -46,10 +46,11 @@
     border: 0;
 }
 
-div.dropdown-multicol2{
-    min-width: 30em;
+.dropdown-multicol2 {
+    /* min-width: 30em;
     width: 40em;
-    max-width: 50em;
+    max-width: 50em; */
+    /* width: auto; */
 }
 
 .dropdown-multicol2 > .dropdown-col{
